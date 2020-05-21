@@ -12,7 +12,7 @@ import (
 
 func main() {
 	app := iris.New()
-	app.Logger().SetLevel("debug")
+	app.Logger().SetLevel("fatal")
 	app.Use(recover.New())
 	app.Use(logger.New())
 	DB, _ := strconv.Atoi(os.Getenv("REDIS_DB"))
@@ -32,5 +32,5 @@ func main() {
 	app.Post("/auth", rs.Auth)
 	app.Post("/super", rs.Super)
 	app.Post("/acl", rs.Acl)
-	app.Run(iris.Addr(":3000"), iris.WithoutServerError(iris.ErrServerClosed))
+	app.Run(iris.Addr(":"+os.Getenv("SERVER_PORT")), iris.WithoutServerError(iris.ErrServerClosed))
 }
