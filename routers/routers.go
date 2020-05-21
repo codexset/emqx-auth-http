@@ -8,8 +8,9 @@ type Routers struct {
 }
 
 type RedisKey struct {
-	ForAuth string
-	ForAcl  string
+	ForAuth  string
+	ForSuper string
+	ForAcl   string
 }
 
 func New(redis *redis.Client, redisKey *RedisKey) *Routers {

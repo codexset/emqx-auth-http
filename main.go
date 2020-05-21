@@ -23,8 +23,9 @@ func main() {
 			DB:       DB,
 		}),
 		&routers.RedisKey{
-			ForAuth: os.Getenv("REDIS_KEY_FOR_AUTH"),
-			ForAcl:  os.Getenv("REDIS_KEY_FOR_ACL"),
+			ForAuth:  os.Getenv("REDIS_KEY_FOR_AUTH"),
+			ForSuper: os.Getenv("REDIS_KEY_FOR_SUPER"),
+			ForAcl:   os.Getenv("REDIS_KEY_FOR_ACL"),
 		},
 	)
 	app.Get("/", rs.Index)

@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/kataras/iris/v12"
-	"github.com/sirupsen/logrus"
 )
 
 type Auth struct {
@@ -19,7 +18,6 @@ func (c *Routers) Auth(ctx iris.Context) {
 	}
 	secret, err := c.redis.HGet(context.Background(), c.redisKey.ForAuth, auth.Username).Result()
 	if err != nil {
-		logrus.Info(err.Error())
 		ctx.StatusCode(401)
 		return
 	}
