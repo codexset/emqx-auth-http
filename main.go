@@ -27,6 +27,9 @@ func main() {
 			ForAcl:  os.Getenv("REDIS_KEY_FOR_ACL"),
 		},
 	)
+	app.Get("/", rs.Index)
 	app.Post("/auth", rs.Auth)
-	app.Run(iris.Addr(":3000"), iris.WithoutServerError(iris.ErrServerClosed))
+	app.Post("/super", rs.Super)
+	app.Post("/acl", rs.Acl)
+	app.Run(iris.Addr("0.0.0.0:3000"), iris.WithoutServerError(iris.ErrServerClosed))
 }

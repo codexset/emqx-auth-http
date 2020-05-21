@@ -2,32 +2,41 @@ package routers
 
 import (
 	"context"
-	jsoniter "github.com/json-iterator/go"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/kataras/iris/v12"
 	"github.com/sirupsen/logrus"
 )
 
 type Auth struct {
 	Username string
-	Password string
+	Token    string
 }
 
 func (c *Routers) Auth(ctx iris.Context) {
 	auth := &Auth{
 		Username: ctx.FormValue("username"),
-		Password: ctx.FormValue("password"),
+		Token:    ctx.FormValue("password"),
 	}
-	result, err := c.redis.HGet(context.Background(), c.redisKey.ForAuth, auth.Username).Result()
+	secret, err := c.redis.HGet(context.Background(), c.redisKey.ForAuth, auth.Username).Result()
+	if err != nil {
+		logrus.Info(err.Error())
+		ctx.StatusCode(401)
+		return
+	}
+	token, err := jwt.Parse(auth.Token, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			ctx.StatusCode(401)
+			return nil, nil
+		}
+		return []byte(secret), nil
+	})
 	if err != nil {
 		ctx.StatusCode(401)
 		return
 	}
-	var data map[string]interface{}
-	err = jsoniter.Unmarshal([]byte(result), &data)
-	if err != nil {
+	if !token.Valid {
 		ctx.StatusCode(401)
 		return
 	}
-	logrus.Info(data["secret"])
 	ctx.StatusCode(200)
 }
