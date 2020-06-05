@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/kataras/iris/v12"
+	"github.com/sirupsen/logrus"
 )
 
 type Auth struct {
@@ -19,21 +20,25 @@ func (c *Routers) Auth(ctx iris.Context) {
 	secret, err := c.redis.HGet(context.Background(), c.redisKey.ForAuth, auth.Username).Result()
 	if err != nil {
 		ctx.StatusCode(401)
+		logrus.Error(err.Error())
 		return
 	}
 	token, err := jwt.Parse(auth.Token, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			ctx.StatusCode(401)
+			logrus.Error(err.Error())
 			return nil, nil
 		}
 		return []byte(secret), nil
 	})
 	if err != nil {
 		ctx.StatusCode(401)
+		logrus.Error(err.Error())
 		return
 	}
 	if !token.Valid {
 		ctx.StatusCode(401)
+		logrus.Error("Token verification is incorrect")
 		return
 	}
 	ctx.StatusCode(200)
