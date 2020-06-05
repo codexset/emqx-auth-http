@@ -14,6 +14,7 @@ func (c *Routers) Acl(ctx iris.Context) {
 		c.redisKey.ForAcl+":"+username,
 		topic,
 	).Result()
+	logrus.Info(exists)
 	if err != nil {
 		ctx.StatusCode(401)
 		logrus.Error(err.Error())
@@ -22,6 +23,7 @@ func (c *Routers) Acl(ctx iris.Context) {
 	if !exists {
 		ctx.StatusCode(401)
 		logrus.Error("acl does not exist")
+		return
 	}
 	ctx.StatusCode(200)
 }

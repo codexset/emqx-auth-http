@@ -17,6 +17,7 @@ func (c *Routers) Super(ctx iris.Context) {
 	if !exists {
 		ctx.StatusCode(401)
 		logrus.Error("super does not exist")
+		return
 	}
 	ctx.StatusCode(200)
 }
