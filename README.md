@@ -2,11 +2,11 @@
 
 EMQX HTTP authentication and ACL control service middleware
 
-[![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/codexset/emqx-auth-http?style=flat-square)](https://github.com/codexset/emqx-auth-http)
-[![Github Actions](https://img.shields.io/github/workflow/status/codexset/emqx-auth-http/release?style=flat-square)](https://github.com/codexset/emqx-auth-http/actions)
+[![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/kainonly/emqx-auth-http?style=flat-square)](https://github.com/kainonly/emqx-auth-http)
+[![Github Actions](https://img.shields.io/github/workflow/status/kainonly/emqx-auth-http/release?style=flat-square)](https://github.com/kainonly/emqx-auth-http/actions)
 [![Image Size](https://img.shields.io/docker/image-size/kainonly/emqx-auth-http?style=flat-square)](https://hub.docker.com/r/kainonly/emqx-auth-http)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kainonly/emqx-auth-http.svg?style=flat-square)](https://hub.docker.com/r/kainonly/emqx-auth-http)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/codexset/emqx-auth-http/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/kainonly/emqx-auth-http/master/LICENSE)
 
 ## Setup
 
