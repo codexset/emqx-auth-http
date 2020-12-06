@@ -10,9 +10,8 @@ import (
 )
 
 var (
-	UserEmptySecret = errors.New("the user secret is not set")
-	SuperNotExists  = errors.New("super does not exist")
-	AclNotExists    = errors.New("acl does not exist")
+	SuperNotExists = errors.New("super does not exist")
+	AclNotExists   = errors.New("acl does not exist")
 )
 
 type controller struct {
@@ -38,9 +37,9 @@ func (c *controller) Auth(ctx *gin.Context) interface{} {
 	if err = ctx.ShouldBind(&body); err != nil {
 		return err
 	}
-	secret := c.Redis.HGet(context.Background(), c.Key.Auth, body.Username).String()
-	if secret == "" {
-		return UserEmptySecret
+	var secret string
+	if secret, err = c.Redis.HGet(context.Background(), c.Key.Auth, body.Username).Result(); err != nil {
+		return err
 	}
 	var token *jwt.Token
 	if token, err = jwt.Parse(body.Token, func(token *jwt.Token) (interface{}, error) {

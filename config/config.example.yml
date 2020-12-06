@@ -6,6 +6,6 @@ redis:
   password:
   db: 0
 key:
-  for_auth: mqtt
-  for_super: mqtt-super
-  for_acl: mqtt-acl
+  auth: mqtt
+  super: mqtt-super
+  acl: mqtt-acl
