@@ -18,6 +18,8 @@ services:
   emqx-auth-http:
     image: kainonly/emqx-auth-http
     restart: always
+    environment:
+      GIN_MODE: release
     volumes:
       - ./emqx/auth:/app/config
     ports:
@@ -28,7 +30,6 @@ services:
 
 For configuration, please refer to `config/config.example.yml`
 
-- **debug** `string` Start debugging, ie `net/http/pprof`, access address is`http://localhost:6060`
 - **listen** `string` grpc server listening address
 - **redis** `redis.Options` reference https://github.com/go-redis/redis
 - **key** reference [#Key](#key)

@@ -9,7 +9,6 @@ import (
 	"go.uber.org/fx"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
-	"net/http"
 	"os"
 )
 
@@ -45,11 +44,7 @@ func InitializeRedis(cfg *config.Config) *redis.Client {
 // Start http service
 // https://gin-gonic.com/docs/examples/custom-http-config/
 func HttpServer(lc fx.Lifecycle, cfg *config.Config) (serve *gin.Engine) {
-	if cfg.Debug != "" {
-		go http.ListenAndServe(cfg.Debug, nil)
-	}
-	serve = gin.New()
-	serve.Use(gin.Recovery())
+	serve = gin.Default()
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			go serve.Run(cfg.Listen)

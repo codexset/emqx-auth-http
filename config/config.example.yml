@@ -1,4 +1,3 @@
-debug: :6060
 listen: :8080
 redis:
   addr: localhost:6379

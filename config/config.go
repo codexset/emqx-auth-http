@@ -6,7 +6,6 @@ import (
 )
 
 type Config struct {
-	Debug  string        `yaml:"debug"`
 	Listen string        `yaml:"listen"`
 	Redis  redis.Options `yaml:"redis"`
 	Key    options.Key   `yaml:"key"`
