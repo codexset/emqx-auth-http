@@ -1,6 +1,5 @@
 debug: :6060
 listen: :8080
-logger: true
 redis:
   addr: localhost:6379
   password:
