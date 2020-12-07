@@ -10,6 +10,7 @@ import (
 )
 
 var (
+	UserNotExists  = errors.New("username does not exist")
 	SuperNotExists = errors.New("super does not exist")
 	AclNotExists   = errors.New("acl does not exist")
 )
@@ -39,7 +40,7 @@ func (c *controller) Auth(ctx *gin.Context) interface{} {
 	}
 	var secret string
 	if secret, err = c.Redis.HGet(context.Background(), c.Key.Auth, body.Username).Result(); err != nil {
-		return err
+		return UserNotExists
 	}
 	var token *jwt.Token
 	if token, err = jwt.Parse(body.Token, func(token *jwt.Token) (interface{}, error) {
