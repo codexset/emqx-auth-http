@@ -80,7 +80,7 @@ services:
       EMQX_AUTH__HTTP__REQUEST__RETRY_BACKOFF: 2.0
       EMQX_AUTH__HTTP__AUTH_REQ: http://emqx-auth-http:8080/auth
       EMQX_AUTH__HTTP__AUTH_REQ__METHOD: post
-      EMQX_AUTH__HTTP__AUTH_REQ__PARAMS: username=%u,password=%P
+      EMQX_AUTH__HTTP__AUTH_REQ__PARAMS: username=%u,token=%P
       EMQX_AUTH__HTTP__SUPER_REQ: http://emqx-auth-http:8080/super
       EMQX_AUTH__HTTP__SUPER_REQ__PARAMS: username=%u
       EMQX_AUTH__HTTP__SUPER_REQ__METHOD: post
